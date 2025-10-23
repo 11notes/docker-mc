@@ -19,7 +19,7 @@ func alias(){
 		Eleven.LogFatal("ERR", "you must set MC_MINIO_ROOT_PASSWORD or MC_MINIO_ROOT_PASSWORD!")
 	}
 
-	_, err := Eleven.Util.Run(BIN, []string{"alias", "set", "minio", os.Getenv("MC_MINIO_URL"), os.Getenv("MC_MINIO_ROOT_USER"), password})
+	_, err = Eleven.Util.Run(BIN, []string{"alias", "set", "minio", os.Getenv("MC_MINIO_URL"), os.Getenv("MC_MINIO_ROOT_USER"), password})
 	if err != nil{
 		Eleven.LogFatal("ERR", "alias failed %s", err)
 	}else{
