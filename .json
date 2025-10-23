@@ -1,7 +1,7 @@
 {
-  "image": "11notes/minio",
-  "name": "minio",
-  "root": "/minio",
+  "image": "11notes/mc",
+  "name": "mc",
+  "root": "/mc",
   "build": {
     "args": {
       "version_build": "08-35-41Z"
