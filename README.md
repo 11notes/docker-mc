@@ -32,6 +32,7 @@ Below you find a comparison between this image and the most used or original one
 
 | **image** | **size on disk** | **init default as** | **[distroless](https://github.com/11notes/RTFM/blob/main/linux/container/image/distroless.md)** | supported architectures
 | ---: | ---: | :---: | :---: | :---: |
+| 11notes/mc:2025.08.13 | 20MB | 1000:1000 | ✅ | amd64, arm64, armv7 |
 | minio/mc | 84MB | 0:0 | ❌ | amd64, arm64, ppc64le |
 
 # VOLUMES 📁
@@ -52,7 +53,7 @@ services:
   minio:
     # for more information about this image checkout:
     # https://github.com/11notes/docker-minio
-    image: "11notes/minio:2025.08.13"
+    image: "11notes/minio:2025.10.15"
     hostname: "minio"
     <<: *lockdown
     environment:
@@ -248,4 +249,4 @@ docker pull quay.io/11notes/mc:2025.08.13
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-mc/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-mc/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-mc/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 23.10.2025, 07:33:57 (CET)*
+*created 23.10.2025, 07:41:55 (CET)*
