@@ -11,7 +11,7 @@ services:
   minio:
     # for more information about this image checkout:
     # https://github.com/11notes/docker-minio
-    image: "11notes/minio:2025.10.15"
+    image: "11notes/minio:2025.08.13"
     hostname: "minio"
     <<: *lockdown
     environment:
