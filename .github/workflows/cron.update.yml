@@ -61,7 +61,7 @@ jobs:
               core.setFailed(e);
             }
 
-            const latest = semver.valid(semver.coerce(LATEST_VERSION.semver'));
+            const latest = semver.valid(semver.coerce(LATEST_VERSION.semver));
             const current = semver.valid(semver.coerce(repository.dot.semver.version));
             const tag = semver.valid(semver.coerce('${{ env.LATEST_TAG }}'));
 
