@@ -10,34 +10,14 @@
 
 # :: FOREIGN IMAGES
   FROM 11notes/distroless AS distroless
+  FROM 11notes/distroless:mc AS distroless-mc
 
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
 # ╚═════════════════════════════════════════════════════╝
-# :: MINIO
-  FROM 11notes/go:1.25 AS build
-  ARG APP_VERSION \
-      APP_VERSION_BUILD \
-      BUILD_ROOT \
-      BUILD_SRC \
-      BUILD_BIN
-
-  RUN set -ex; \
-    SEMVER=$(echo ${APP_VERSION} | sed 's|\.|-|g'); \
-    eleven git clone ${BUILD_SRC} RELEASE.${SEMVER}T${APP_VERSION_BUILD};
-
-  RUN set -ex; \
-    cd ${BUILD_ROOT}; \
-    eleven go build ${BUILD_BIN} main.go;
-
-  RUN set -ex; \
-    eleven distroless ${BUILD_BIN};
-
 # :: ENTRYPOINT
   FROM 11notes/go:1.25 AS entrypoint
   COPY ./build /
-  ARG APP_VERSION \
-      APP_VERSION_BUILD
 
   RUN set -ex; \
     cd /go/entrypoint; \
@@ -89,7 +69,7 @@
 
   # :: multi-stage
     COPY --from=distroless / /
-    COPY --from=build /distroless/ /
+    COPY --from=distroless-mc / /
     COPY --from=entrypoint /distroless/ /
     COPY --from=file-system --chown=${APP_UID}:${APP_GID} /distroless/ /
 
