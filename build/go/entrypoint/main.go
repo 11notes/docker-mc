@@ -16,14 +16,14 @@ var(
 func alias(){
 	password, err := Eleven.Container.GetSecret("MC_MINIO_ROOT_PASSWORD", "MC_MINIO_ROOT_PASSWORD_FILE")
 	if err != nil {
-		Eleven.LogFatal("you must set MC_MINIO_ROOT_PASSWORD or MC_MINIO_ROOT_PASSWORD!")
+		Eleven.LogFatal("you must set MC_MINIO_ROOT_PASSWORD or MC_MINIO_ROOT_PASSWORD_FILE!")
 	}
 
-	_, err = Eleven.Util.Run(BIN, []string{"alias", "set", "minio", os.Getenv("MC_MINIO_URL"), os.Getenv("MC_MINIO_ROOT_USER"), password})
+	_, err = Eleven.Util.Run(BIN, []string{"alias", "set", os.Getenv("MC_ALIAS"), os.Getenv("MC_MINIO_URL"), os.Getenv("MC_MINIO_ROOT_USER"), password})
 	if err != nil{
 		Eleven.LogFatal("alias failed %s", err)
 	}else{
-		Eleven.Log("INF", "set alias to minio for all future commands")
+		Eleven.Log("INF", "set alias to %s for all future commands", os.Getenv("MC_ALIAS"))
 	}
 }
 

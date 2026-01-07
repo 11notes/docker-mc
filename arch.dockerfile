@@ -83,6 +83,8 @@
   # :: app specific environment
     ENV MC_CONFIG_DIR=${APP_ROOT}/etc \
         MC_JSON="true" \
+        MC_NO_COLOR="true" \
+        MC_ALIAS="minio" \
         MC_MINIO_ROOT_USER="admin"
 
   # :: multi-stage

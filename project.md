@@ -22,13 +22,13 @@ ${{ title_volumes }}
 ${{ content_compose }}
 
 ${{ content_defaults }}
-| `alias` | minio | the alias used for all mc interactions |
 
 ${{ content_environment }}
 | `MC_MINIO_URL` | URL of minio server to connect to |  |
 | `MC_MINIO_ROOT_USER` | username of admin account | admin |
 | `MC_MINIO_ROOT_PASSWORD` | password of root user |  |
 | `MC_MINIO_ROOT_PASSWORD_FILE` | password file of root user for secrets |  |
+| `MC_ALIAS` | alias used to access minio | minio |
 | `MC_*` | all other available [settings](https://docs.min.io/enterprise/aistor-object-store/reference/cli/aistor-client-settings/) |  |
 
 ${{ content_source }}
