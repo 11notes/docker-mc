@@ -13,7 +13,7 @@ jobs:
       actions: read
       contents: write
 
-    steps:   
+    steps:
       - name: init / checkout
         uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
         with:
@@ -22,7 +22,7 @@ jobs:
 
       - name: cron-update / get latest version
         run: |
-          echo "LATEST_VERSION=$(curl -s https://api.github.com/repos/minio/mc/releases/latest | jq -r '.tag_name' | sed 's|RELEASE.||')" >> "${GITHUB_ENV}"
+          echo "LATEST_VERSION=$(curl -s https://api.github.com/repos/minio/mc/releases/latest | jq -r '.tag_name' | sed 's|RELEASE.||' | sed 's|-|.|g' | awk -F 'T' '{print $1}')" >> "${GITHUB_ENV}"
           echo "LATEST_TAG=$(git describe --abbrev=0 --tags `git rev-list --tags --max-count=1` | sed 's/v//')" >> "${GITHUB_ENV}"
 
       - name: cron-update / setup node
