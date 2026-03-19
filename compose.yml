@@ -7,28 +7,7 @@ x-lockdown: &lockdown
   security_opt:
     - "no-new-privileges=true"
 
-services:    
-  minio:
-    # for more information about this image checkout:
-    # https://github.com/11notes/docker-minio
-    image: "11notes/minio:2025.10.15"
-    hostname: "minio"
-    <<: *lockdown
-    environment:
-      TZ: "Europe/Zurich"
-      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
-    # in stand-alone (no disks) simply use /mnt as your command
-    # then mount any volume to /mnt to store your data
-    command: "/mnt"
-    ports:
-      - "3000:9001/tcp"
-      - "9000:9000/tcp"
-    volumes:
-      - "minio.var:/mnt"
-    networks:
-      backend:
-    restart: "always"
-
+services:
   mc:
     depends_on:
       minio:
@@ -50,11 +29,29 @@ services:
       backend:
     restart: "no"
 
+minio:
+    # for more information about this image checkout:
+    # https://github.com/11notes/docker-minio
+    image: "11notes/minio:2025.10.15"
+    hostname: "minio"
+    <<: *lockdown
+    environment:
+      TZ: "Europe/Zurich"
+      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
+    command: "/mnt"
+    ports:
+      - "3000:9001/tcp"
+      - "9000:9000/tcp"
+    volumes:
+      - "minio.var:/mnt"
+    networks:
+      backend:
+    restart: "always"
+
 volumes:
-  minio.var:
   mc.etc:
+  minio.var:
 
 networks:
-  frontend:
   backend:
     internal: true
