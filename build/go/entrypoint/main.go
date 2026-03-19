@@ -4,10 +4,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/11notes/docker-util"
+	"github.com/11notes/go-eleven"
 )
 
-const BIN string = "/usr/local/bin/mc"
+const MC string = "/usr/local/MC/mc"
 
 func alias(){
 	password, err := eleven.Container.GetSecret("MC_MINIO_ROOT_PASSWORD", "MC_MINIO_ROOT_PASSWORD_FILE")
@@ -15,7 +15,7 @@ func alias(){
 		eleven.LogFatal("you must set MC_MINIO_ROOT_PASSWORD or MC_MINIO_ROOT_PASSWORD_FILE!")
 	}
 
-	_, err = eleven.Util.Run(BIN, []string{"alias", "set", os.Getenv("MC_ALIAS"), os.Getenv("MC_MINIO_URL"), os.Getenv("MC_MINIO_ROOT_USER"), password})
+	_, err = eleven.Util.Run(MC, []string{"alias", "set", os.Getenv("MC_ALIAS"), os.Getenv("MC_MINIO_URL"), os.Getenv("MC_MINIO_ROOT_USER"), password})
 	if err != nil{
 		eleven.LogFatal("alias failed %s", err)
 	}else{
@@ -24,7 +24,7 @@ func alias(){
 }
 
 func command(cmd string){
-	out, err := eleven.Util.Run(BIN, strings.Split(cmd, " "))
+	out, err := eleven.Util.Run(MC, strings.Split(cmd, " "))
 	if err != nil{
 		eleven.Log("ERR", "command failed %s", err)
 	}else{
