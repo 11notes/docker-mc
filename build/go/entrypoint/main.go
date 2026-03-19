@@ -7,7 +7,7 @@ import (
 	"github.com/11notes/go-eleven"
 )
 
-const MC string = "/usr/local/MC/mc"
+const MC string = "/usr/local/bin/mc"
 
 func alias(){
 	password, err := eleven.Container.GetSecret("MC_MINIO_ROOT_PASSWORD", "MC_MINIO_ROOT_PASSWORD_FILE")
